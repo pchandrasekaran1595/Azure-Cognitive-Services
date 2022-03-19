@@ -1,2 +1,5 @@
 azure-cognitiveservices-vision-face>=0.6.0
 pillow>=9.0.0
+matplotlib==3.5.1
+numpy>=1.21.0
+opencv-python-headless

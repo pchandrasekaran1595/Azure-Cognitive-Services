@@ -1,3 +1,7 @@
+"""
+    Only Describing done in this script
+"""
+
 import os
 import sys
 import time
@@ -11,6 +15,9 @@ from array import array
 from PIL import Image
 
 
+READ_PATH = "Files"
+
+
 def breaker(num: int = 50, char: str = "*") -> None:
     print("\n" + num*char + "\n")
 
@@ -18,11 +25,14 @@ def breaker(num: int = 50, char: str = "*") -> None:
 def main():
     subscription_key: str = None
     endpoint: str = None
-    read_image_url: str = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg"
+    # read_image_url: str = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg"
+    read_image_url: str = None
+    filename: str = "Test.jpg"
 
     args_1: tuple = ("--subscription-key", "-skey")
     args_2: tuple = ("--endpoint", "-endp")
     args_3: tuple = ("--url", "-u")
+    args_4: tuple = ("--file", "-f")
 
     if args_1[0] in sys.argv: subscription_key = sys.argv[sys.argv.index(args_1[0]) + 1]
     if args_1[1] in sys.argv: subscription_key = sys.argv[sys.argv.index(args_1[1]) + 1]
@@ -33,6 +43,9 @@ def main():
     if args_3[0] in sys.argv: read_image_url = sys.argv[sys.argv.index(args_3[0]) + 1]
     if args_3[1] in sys.argv: read_image_url = sys.argv[sys.argv.index(args_3[1]) + 1]
 
+    if args_4[0] in sys.argv: filename = sys.argv[sys.argv.index(args_4[0]) + 1]
+    if args_4[1] in sys.argv: filename = sys.argv[sys.argv.index(args_4[1]) + 1]
+
     # subscription_key: str = os.environ.get("COMPUTER_VISION_SUBSCRIPTION_KEY")
     # endpoint: str = os.environ.get("COMPUTER_VISION_ENDPOINT")
 
@@ -42,7 +55,11 @@ def main():
     computervision_client = ComputerVisionClient(endpoint, CognitiveServicesCredentials(subscription_key))
 
     # Call API
-    description_results = computervision_client.describe_image(read_image_url)
+    if read_image_url is not None:
+        description_results = computervision_client.describe_image(read_image_url)
+    else:
+        description_results = computervision_client.describe_image_in_stream(open(os.path.join(READ_PATH, filename), "rb"))
+
 
     # Get the captions (descriptions) from the response, with confidence level
     breaker()
