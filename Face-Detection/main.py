@@ -66,7 +66,7 @@ def main():
     endpoint: str = None
     # read_image_url: str = "https://raw.githubusercontent.com/Azure-Samples/cognitive-services-sample-data-files/master/ComputerVision/Images/landmark.jpg"
     read_image_url: str = None
-    filename: str = "Test.jpg"
+    filename: str = "Test.png"
 
     args_1: tuple = ("--subscription-key", "-skey")
     args_2: tuple = ("--endpoint", "-endp")
@@ -117,7 +117,7 @@ def main():
 
         image = drawFaceRectangles(detected_faces, filename=filename)
 
-    show(image)
+    image.show()
 
 ####################################################################################################
  
