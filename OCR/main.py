@@ -80,6 +80,7 @@ def main():
             for line in text_result.lines:
                 print(line.text)
                 print(line.bounding_box)
+                print("")
     breaker()
 
 
