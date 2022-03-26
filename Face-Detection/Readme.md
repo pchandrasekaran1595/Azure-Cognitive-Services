@@ -1,1 +1,1 @@
-### Image Analysis using Azure Cognitive Services Computer Vision
+### Face Detection using Azure Cognitive Services Face API
